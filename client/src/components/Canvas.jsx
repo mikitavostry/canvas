@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import canvasState from '../store/canvasState'
 import toolState from '../store/toolState'
 import Brush from '../tools/Brush'
+import Rect from '../tools/Rect'
 import { Modal, Button } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 const Canvas = observer(() => {
@@ -42,10 +43,12 @@ const Canvas = observer(() => {
                     case 'draw':
                         drawHandler(msg)
                         break
+                    default:
+
                 }
             }
         }
-    }, [canvasState.username])
+    }, [params.id])
 
     const drawHandler = (msg) => {
         const figure = msg.figure
@@ -54,9 +57,14 @@ const Canvas = observer(() => {
             case 'brush':
                 Brush.draw(ctx, figure.x, figure.y)
                 break
+            case 'rect':
+                Rect.staticDraw(ctx, figure.x, figure.y, figure.width, figure.height, figure.color)
+                break
             case 'finish':
                 ctx.beginPath()
                 break
+            default:
+
         }
     }
 
