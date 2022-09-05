@@ -20,7 +20,7 @@ const ToolBar = () => {
         const a = document.createElement('a')
         a.href = dataUrl
         a.download = canvasState.sessionId + '.jpg'
-        document.appendChild(a)
+        document.body.appendChild(a)
         a.click()
         document.body.removeChild()
     }
@@ -35,8 +35,7 @@ const ToolBar = () => {
             <input onChange={e => changeColor(e)} id='stroke-color' style={{ marginLeft: 10 }} type="color" />
             <button className='toolbar__btn undo' onClick={() => canvasState.undo()}></button>
             <button className='toolbar__btn redo' onClick={() => canvasState.redo()}></button>
-            <button className='toolbar__btn save'></button>
-
+            <button className='toolbar__btn save' onClick={() => download()}></button>
         </div >
     )
 }
